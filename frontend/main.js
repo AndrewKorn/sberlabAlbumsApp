@@ -27,11 +27,27 @@ const app = new Vue({
         },
 
         createPlaylist: function () {
-            this.$http.post("http://localhost:8080/albums", {album_name: this.albumName}).then(response => {
-                console.log(this.albumName)
+            if (this.albumName !== "") {
+                this.$http.post("http://localhost:8080/albums", {album_name: this.albumName}).then(response => {
+                    console.log(this.albumName)
+                }, () => {
+                    console.log("err")
+                });
+            }
+        },
+
+        deletePlaylist: function (name) {
+            this.$http.delete("http://localhost:8080/albums/" + name + "").then(response => {
+
+                const index = this.albums.indexOf(name);
+                if (index !== -1) {
+                    this.albums.splice(index, 1)
+                }
+                window.location.reload()
             }, () => {
                 console.log("err")
-            });
+            })
+
         }
     },
     beforeMount() {

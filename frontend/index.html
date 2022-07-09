@@ -14,33 +14,40 @@
   <div class="container" id='app'>
     <h1 style="text-align: center; padding: 30px">{{message}}</h1>
     <h3 style="padding-top: 30px">Current playlists:</h3>
-    <table class="table">
-      <thead>
+
+    <table class="table table-hover">
+      <thead class="thead-dark">
       <tr>
         <th scope="col">№</th>
         <th scope="col">Playlist Name</th>
         <th scope="col">Songs count</th>
+        <th scope="col"></th>
       </tr>
       </thead>
       <tbody>
-      <tr v-for="(album, index) in albums">
+
+
+
+
+      <tr v-for="(album, index) in albums" @click="openPlaylist(album.album_name)">
+
+
         <th scope="row">{{index + 1}}</th>
+        <td>{{album.album_name}}</td>
+        <td >{{album.songs.length}}</td>
         <td>
-          <button type="button" class="btn btn-light" @click="openPlaylist(album.album_name)">{{album.album_name}}</button>
+          <button class="btn btn-outline-danger" @click="deletePlaylist(album.album_name)">X</button>
         </td>
-        <td>{{album.songs.length}}</td>
       </tr>
       </tbody>
     </table>
 
     <form class="form-inline" style="margin: 0 auto; width: 400px">
-      <div class="form-group mx-sm-3 mb-2">
+      <div class="form-group mx-sm-3 mb">
         <input type="playlistName" class="form-control" id="inputNewPlaylist" placeholder="New playlist name" v-model="albumName">
       </div>
       <button class="btn btn-primary" @click="createPlaylist">Create new playlist</button>
     </form>
-
-      <!--<button style="margin: 0 auto; display: block" type="button" class="btn btn-light" @click="createPlaylist">Create new playlist</button>-->
 
   </div>
 
