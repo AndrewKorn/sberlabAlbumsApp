@@ -91,8 +91,8 @@ func createSong(w http.ResponseWriter, r *http.Request) {
 			var song Song
 			_ = json.NewDecoder(r.Body).Decode(&song)
 			song.ID = strconv.Itoa(rand.Intn(1000000))
-			i, _ := strconv.Atoi(item.ID)
-			albums[i].Songs = append(albums[i].Songs, song)
+			item.Songs = append(item.Songs, song)
+			println(item.Songs[0].SongName, item.Songs[1].SongName, item.Songs[2].SongName, item.Songs[3].SongName)
 			err := json.NewEncoder(w).Encode(song)
 			if err != nil {
 				return
@@ -150,15 +150,15 @@ func deleteSong(w http.ResponseWriter, r *http.Request) {
 		if item.AlbumName == params["album_name"] {
 			for index, songItem := range item.Songs {
 				if songItem.ID == params["song_id"] {
-					item.Songs = append(item.Songs[:index], item.Songs[index+1])
+					item.Songs = append(item.Songs[:index], item.Songs[index+1:]...)
+					err := json.NewEncoder(w).Encode(item.Songs)
+					if err != nil {
+						return
+					}
 					break
 				}
 			}
 		}
-	}
-	err := json.NewEncoder(w).Encode(albums)
-	if err != nil {
-		return
 	}
 }
 
@@ -167,11 +167,11 @@ var albums []Album
 func main() {
 	r := mux.NewRouter()
 	var songs1 []Song
-	songs1 = append(songs1, Song{"1", "kizaru", "train wrack"}, Song{"2", "yanix", "moscow"})
+	songs1 = append(songs1, Song{"1", "kizaru", "train wreck"}, Song{"2", "yanix", "moscow"})
 	albums = append(albums, Album{"1", "First Day Out", songs1})
 
 	var songs2 []Song
-	songs2 = append(songs2, Song{"1", "OGBuda", "saifer"}, Song{"2", "163ONMYNECK", "выключатель"}, Song{"3", "Mayot", "море"})
+	songs2 = append(songs2, Song{"1", "OGBuda", "Сайфер"}, Song{"2", "163ONMYNECK", "выключатель"}, Song{"3", "Mayot", "море"})
 	albums = append(albums, Album{"2", "Meloners", songs2})
 
 	r.HandleFunc("/albums", getAlbums).Methods("GET")
