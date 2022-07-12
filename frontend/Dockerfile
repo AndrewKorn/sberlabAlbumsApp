@@ -8,7 +8,7 @@ ENV API_BASE_URL "$API_BASE_URL"
 WORKDIR /app
 COPY ["package.json", "package-lock.json*", "./"]
 RUN npm install
-COPY . .
+COPY .. .
 RUN npm run build
 
 # production stage
