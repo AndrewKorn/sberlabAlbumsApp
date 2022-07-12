@@ -28,7 +28,7 @@ export default {
   },
 
   mounted() {
-    fetch("http://localhost:8080/albums")
+    fetch("http://localhost:1337/albums")
         .then(response => response.json())
         .then(json => {
           this.albums = json
@@ -43,7 +43,7 @@ export default {
   methods: {
     deletePlaylist(name) {
       console.log(name)
-      fetch("http://localhost:8080/albums/" + name + "", {method: "DELETE"})
+      fetch("http://localhost:1337/albums/" + name + "", {method: "DELETE"})
           .then(response => {
             this.albums = this.albums.filter(album => album.album_name !== name)
           })
@@ -51,7 +51,7 @@ export default {
 
     createPlaylist(album) {
       console.log(album.album_name)
-      fetch("http://localhost:8080/albums", {
+      fetch("http://localhost:1337/albums", {
         method: "POST",
         body: JSON.stringify({
           album_name: album.album_name
