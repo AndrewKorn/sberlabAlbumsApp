@@ -11,9 +11,10 @@ import (
 )
 
 type Song struct {
-	ID       string `json:"id"`
+	ID       string `json:"song_id"`
 	Artist   string `json:"artist"`
 	SongName string `json:"song_name"`
+	Duration string `json:"duration"`
 }
 
 type Album struct {
@@ -90,11 +91,20 @@ func createSong(w http.ResponseWriter, r *http.Request) {
 		if item.AlbumName == params["album_name"] {
 			var song Song
 			_ = json.NewDecoder(r.Body).Decode(&song)
-			song.ID = strconv.Itoa(rand.Intn(1000000))
+
 			item.Songs = append(item.Songs, song)
-			println(item.Songs[0].SongName, item.Songs[1].SongName, item.Songs[2].SongName, item.Songs[3].SongName)
+
+			for index, it := range albums {
+				if it.AlbumName == params["album_name"] {
+					albums = append(albums[:index], albums[index+1:]...)
+					break
+				}
+			}
+
+			albums = append(albums, item)
 			err := json.NewEncoder(w).Encode(song)
 			if err != nil {
+				println("err")
 				return
 			}
 			return
@@ -151,6 +161,14 @@ func deleteSong(w http.ResponseWriter, r *http.Request) {
 			for index, songItem := range item.Songs {
 				if songItem.ID == params["song_id"] {
 					item.Songs = append(item.Songs[:index], item.Songs[index+1:]...)
+
+					for index, it := range albums {
+						if it.AlbumName == params["album_name"] {
+							albums = append(albums[:index], albums[index+1:]...)
+							break
+						}
+					}
+					albums = append(albums, item)
 					err := json.NewEncoder(w).Encode(item.Songs)
 					if err != nil {
 						return
@@ -167,11 +185,11 @@ var albums []Album
 func main() {
 	r := mux.NewRouter()
 	var songs1 []Song
-	songs1 = append(songs1, Song{"1", "kizaru", "train wreck"}, Song{"2", "yanix", "moscow"})
+	songs1 = append(songs1, Song{"1298045950", "kizaru", "train wreck", "1:59"}, Song{"1235590951", "yanix", "Москва", "2:06"})
 	albums = append(albums, Album{"1", "First Day Out", songs1})
 
 	var songs2 []Song
-	songs2 = append(songs2, Song{"1", "OGBuda", "Сайфер"}, Song{"2", "163ONMYNECK", "выключатель"}, Song{"3", "Mayot", "море"})
+	songs2 = append(songs2, Song{"1045470445", "OGBuda", "Сайфер", "2:56"}, Song{"1217814655", "163ONMYNECK", "выключатель", "1:36"}, Song{"863371033", "Mayot", "море", "2:24"})
 	albums = append(albums, Album{"2", "Meloners", songs2})
 
 	r.HandleFunc("/albums", getAlbums).Methods("GET")
@@ -183,9 +201,9 @@ func main() {
 	r.HandleFunc("/albums/{album_name}", deleteAlbum).Methods("DELETE")
 	r.HandleFunc("/albums/{album_name}/{song_id}", deleteSong).Methods("DELETE")
 
-	headersOk := handlers.AllowedHeaders([]string{"Accept", "Accept-Language", "Content-Type", "Content-Language", "Origin"})
+	headersOk := handlers.AllowedHeaders([]string{"*"})
 	originsOk := handlers.AllowedOrigins([]string{"*"})
 	methodsOk := handlers.AllowedMethods([]string{"GET", "HEAD", "POST", "PUT", "OPTIONS", "DELETE"})
 
-	log.Fatal(http.ListenAndServe(":8080", handlers.CORS(originsOk, headersOk, methodsOk)(r)))
+	log.Fatal(http.ListenAndServe(":1337", handlers.CORS(originsOk, headersOk, methodsOk)(r)))
 }

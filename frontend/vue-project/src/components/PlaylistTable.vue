@@ -1,11 +1,11 @@
 <template>
   <div>
-    <table class="table table-hover">
-      <thead class="thead-dark">
+    <table class="table">
+      <thead class="thead-light">
       <tr>
-        <th scope="col">№</th>
-        <th scope="col">Playlist Name</th>
-        <th scope="col">Songs count</th>
+        <th scope="col"><strong>№</strong></th>
+        <th scope="col"><strong>Playlist Name</strong></th>
+        <th scope="col"><strong>Songs count</strong></th>
         <th scope="col"></th>
       </tr>
       </thead>
@@ -32,9 +32,10 @@ export default {
 </script>
 
 <style scoped>
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  th {
+    text-align: center;
+  }
+  td {
+    text-align: center;
   }
 </style>

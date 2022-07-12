@@ -12,5 +12,6 @@
     <orderEntry type="library" name="vue-resource" level="application" />
     <orderEntry type="library" name="jquery-3.4.1.slim" level="application" />
     <orderEntry type="library" name="vue-router" level="application" />
+    <orderEntry type="library" name="api" level="application" />
   </component>
 </module>

@@ -6,7 +6,7 @@
     <div class="form-group mx-sm-3 mb-2">
       <input type="text" class="form-control" id="inputName" placeholder="Song name" v-model="song_name">
     </div>
-    <button class="btn btn-primary mb-2">Add song</button>
+    <button class="btn btn-secondary mb-2">Add song</button>
   </form>
 </template>
 
@@ -15,8 +15,10 @@ export default {
   name: "AddSongForm",
   data() {
     return {
+      song_id: "",
       artist: "",
-      song_name: ""
+      song_name: "",
+      duration: ""
     }
   },
 
@@ -24,8 +26,10 @@ export default {
     onSubmit() {
       if (this.song_name.trim() && this.artist.trim()) {
         const newSong = {
+          song_id: this.song_id,
           artist: this.artist,
-          song_name: this.song_name
+          song_name: this.song_name,
+          duration: this.duration
         }
         this.$emit("createSong", newSong)
       }

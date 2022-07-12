@@ -32,7 +32,7 @@ export default {
   mounted() {
     this.album_name = this.$route.params.name
     console.log(this.album_name)
-    fetch("http://localhost:1337/albums/" + this.album_name + "")
+    fetch("http://localhost:8080/albums/" + this.album_name + "")
         .then(response => response.json())
         .then(json => {
           this.songs = json.songs
@@ -59,8 +59,8 @@ export default {
     },
 
     deleteSong(song) {
-      console.log("http://localhost:1337/albums/" + this.album_name + "/" + song.id + "")
-      fetch("http://localhost:1337/albums/" + this.album_name + "/" + song.id + "", {method: "DELETE"})
+      console.log("http://localhost:8080/albums/" + this.album_name + "/" + song.id + "")
+      fetch("http://localhost:8080/albums/" + this.album_name + "/" + song.id + "", {method: "DELETE"})
           .then(response => {
             console.log(response)
             this.songs = this.songs.filter(s => s.song_name !== song.song_name)
@@ -68,8 +68,8 @@ export default {
     },
 
     createSong(song) {
-      console.log("http://localhost:1337/albums/" + this.album_name + "")
-      fetch("http://localhost:1337/albums/" + this.album_name + "" , {
+      console.log("http://localhost:8080/albums/" + this.album_name + "")
+      fetch("http://localhost:8080/albums/" + this.album_name + "" , {
         method: "POST",
         body: JSON.stringify({
           artist: song.artist,
