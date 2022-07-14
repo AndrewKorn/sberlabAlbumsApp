@@ -3,7 +3,7 @@
     <div class="form-group mx-sm-3 mb">
       <input type="text" class="form-control" id="inputNewPlaylist" placeholder="New playlist name" v-model="album_name">
     </div>
-    <button class="btn btn-primary">Create new playlist</button>
+    <button class="btn btn-secondary">Create new playlist</button>
   </form>
 </template>
 
@@ -34,6 +34,6 @@ export default {
 <style scoped>
   form {
     margin: 0 auto;
-    width: 500px;
+    width: 400px;
   }
 </style>

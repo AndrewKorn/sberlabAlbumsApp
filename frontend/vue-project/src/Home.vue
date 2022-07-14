@@ -2,17 +2,17 @@
   <div>
     <h3><strong>Current playlists:</strong></h3>
 
-      <div class="pltab">
-        <PlaylistTable
-            v-bind:albums="albums"
-            @deletePlaylist="deletePlaylist"
-            @openPlaylist="openPlaylist"
-        />
-      </div>
-
-      <AddPlaylistForm
-        @createPlaylist="createPlaylist"
+    <div class="pltab">
+      <PlaylistTable
+          v-bind:albums="albums"
+          @deletePlaylist="deletePlaylist"
+          @openPlaylist="openPlaylist"
       />
+    </div>
+
+    <AddPlaylistForm
+      @createPlaylist="createPlaylist"
+    />
   </div>
 </template>
 
@@ -73,7 +73,6 @@ export default {
 <style scoped>
   h3 {
     text-align: left;
-    padding-top: 50px;
     padding-left: 2%;
     padding-bottom: 10px;
   }

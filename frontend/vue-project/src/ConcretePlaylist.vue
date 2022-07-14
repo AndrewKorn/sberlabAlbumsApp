@@ -1,6 +1,10 @@
 <template>
   <div class="app">
-    <h3>{{$route.params.name}}:</h3>
+
+    <div class="top">
+      <button class="btn btn-outline-dark" v-on:click="backBtn"><strong>◀</strong></button>
+      <h3><strong>{{$route.params.name}}:</strong></h3>
+    </div>
 
     <SongTable
       v-bind:songs="songs"
@@ -18,6 +22,7 @@
 
 import SongTable from "./components/SongTable.vue";
 import AddSongForm from "./components/AddSongForm.vue";
+import router from "./router";
 export default {
   name: "ConcretePlaylist",
   components: {AddSongForm, SongTable},
@@ -100,6 +105,10 @@ export default {
                     )
               }
           )
+    },
+
+    backBtn() {
+      router.push('/')
     }
   }
 }
@@ -112,12 +121,20 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
   }
 
   h3 {
     text-align: left;
-    padding-top: 50px;
-    padding-left: 10px;
+    padding-left: 1%;
+  }
+
+  .top {
+    display: flex;
+  }
+
+  button {
+    text-align: center;
+    height: 35px;
+    margin-left: 2.5%;
   }
 </style>
