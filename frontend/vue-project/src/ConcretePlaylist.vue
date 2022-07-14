@@ -68,16 +68,38 @@ export default {
     },
 
     createSong(song) {
-      console.log("http://localhost:1337/albums/" + this.album_name + "")
-      fetch("http://localhost:1337/albums/" + this.album_name + "" , {
-        method: "POST",
-        body: JSON.stringify({
-          artist: song.artist,
-          song_name: song.song_name
-        })})
+      const options = {
+        method: 'GET',
+        headers: {
+          'X-RapidAPI-Key': '24c67493b3mshab853c823f5dadfp1c2d93jsn0996aee90e2c',
+          'X-RapidAPI-Host': 'soundcloud-scraper.p.rapidapi.com'
+        }
+      };
+
+      fetch('https://soundcloud-scraper.p.rapidapi.com/v1/search/tracks?term=' + song.artist + '%20' + song.song_name + '', options)
+          .then(response => response.json())
           .then(response => {
-            this.songs.push(song)
+            console.log(response)
+            song.song_id = response.tracks.items[0].id.toString()
+            song.duration = response.tracks.items[0].durationText
+            console.log(song.song_id)
           })
+          .then(response => {
+                fetch("http://localhost:1337/albums/" + this.album_name + "", {
+                  method: "POST",
+                  body: JSON.stringify({
+                    song_id: song.song_id,
+                    artist: song.artist,
+                    song_name: song.song_name,
+                    duration: song.duration
+                  })
+                })
+                    .then(response => {
+                          this.songs.push(song)
+                        }
+                    )
+              }
+          )
     }
   }
 }
