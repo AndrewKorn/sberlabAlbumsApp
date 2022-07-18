@@ -33,7 +33,7 @@ export default {
 
 <style scoped>
   form {
+    width: 30%;
     margin: 0 auto;
-    width: 400px;
   }
 </style>

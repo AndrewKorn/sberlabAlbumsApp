@@ -2,12 +2,16 @@
   <div>
     <h3><strong>Current playlists:</strong></h3>
 
-    <div class="pltab">
+    <div class="playlistTab" v-if="albums.length > 0">
       <PlaylistTable
           v-bind:albums="albums"
           @deletePlaylist="deletePlaylist"
           @openPlaylist="openPlaylist"
       />
+    </div>
+
+    <div v-else>
+      <h2 style="text-align: center">There is no albums yet</h2>
     </div>
 
     <AddPlaylistForm
@@ -77,7 +81,7 @@ export default {
     padding-bottom: 10px;
   }
 
-  .pltab {
+  .playlistTab {
     margin-left: 2%;
     margin-right: 2%;
   }

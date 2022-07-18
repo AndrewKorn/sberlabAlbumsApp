@@ -7,10 +7,15 @@
     </div>
 
     <SongTable
+      v-if="songs.length > 0"
       v-bind:songs="songs"
       @openSong="openSong"
       @deleteSong="deleteSong"
     />
+
+    <div v-else>
+      <h2 style="text-align: center">There is no songs yet</h2>
+    </div>
 
     <AddSongForm
       @createSong="createSong"
