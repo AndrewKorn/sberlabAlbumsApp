@@ -3,7 +3,7 @@
 
     <div class="top">
       <button class="btn btn-outline-dark" v-on:click="backBtn"><strong>◀</strong></button>
-      <h3><strong>{{$route.params.name}}:</strong></h3>
+      <h3><strong>{{$route.params.album_name}}:</strong></h3>
     </div>
 
     <SongTable
@@ -40,9 +40,9 @@ export default {
 
 
   mounted() {
-    this.album_name = this.$route.params.name
+    this.album_name = this.$route.params.album_name
     console.log(this.album_name)
-    fetch("http://localhost:1337/albums/" + this.album_name + "")
+    fetch("http://localhost:1337/" + this.$route.params.group_name + "/albums/" + this.album_name + "")
         .then(response => response.json())
         .then(json => {
           this.songs = json.songs
@@ -70,7 +70,7 @@ export default {
 
     deleteSong(song) {
       console.log("http://localhost:1337/albums/" + this.album_name + "/" + song.id + "")
-      fetch("http://localhost:1337/albums/" + this.album_name + "/" + song.id + "", {method: "DELETE"})
+      fetch("http://localhost:1337/" + this.$route.params.group_name + "/albums/" + this.album_name + "/" + song.id + "", {method: "DELETE"})
           .then(response => {
             console.log(response)
             this.songs = this.songs.filter(s => s.song_name !== song.song_name)
@@ -95,7 +95,7 @@ export default {
             console.log(song.song_id)
           })
           .then(response => {
-                fetch("http://localhost:1337/albums/" + this.album_name + "", {
+                fetch("http://localhost:1337/" + this.$route.params.group_name + "/albums/" + this.album_name + "", {
                   method: "POST",
                   body: JSON.stringify({
                     song_id: song.song_id,
@@ -113,7 +113,7 @@ export default {
     },
 
     backBtn() {
-      router.push('/')
+      router.push('/' + this.$route.params.group_name + "/albums")
     }
   }
 }

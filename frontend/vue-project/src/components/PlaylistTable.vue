@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <div :class='"scrolling-wrapper row row-cols-1 row-cols-md-" + (albums.length > 2 ? 3 : albums.length)'>
+    <div :class='"scrolling-wrapper row row-cols-1 row-cols-md-3"'>
       <div class="col mb-4" v-for="(album, index) in albums">
         <div class="card h-100 bg-light text-center p-3">
           <div class="modal-header">
