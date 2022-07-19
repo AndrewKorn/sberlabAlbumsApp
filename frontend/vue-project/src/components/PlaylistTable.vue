@@ -13,11 +13,11 @@
           <div v-on:click="$emit('openPlaylist', album.album_name)">
           <img :src='"../../" + this.pic[index % this.pic.length] + ""' height="200" class="card-img-top">
           <div class="card-body">
-            <p style="text-align: left; margin-top: 5px; margin-bottom: 0"><strong>Preview:</strong></p>
+<!--            <p style="text-align: left; margin-top: 5px; margin-bottom: 0"><strong>Preview:</strong></p>
             <p class="card-text" v-for="song in album.songs.slice(0, 3)" style="text-align: left; margin-top: 5px; margin-bottom: 5px;"  v-if="album.songs.length > 0">
               {{song.artist}} - {{song.song_name}} ({{song.duration}})
             </p>
-            <p class="card-text" v-else>There is no songs yet</p>
+            <p class="card-text" v-else>There is no songs yet</p>-->
           </div>
           </div>
         </div>

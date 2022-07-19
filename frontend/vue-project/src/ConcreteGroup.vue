@@ -37,6 +37,7 @@ export default {
     fetch("http://localhost:1337/" + this.$route.params.group_name + "/albums")
         .then(response => response.json())
         .then(json => {
+          console.log(json)
           this.albums = json
         })
   },

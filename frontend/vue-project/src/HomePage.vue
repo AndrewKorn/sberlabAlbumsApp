@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h2>To start creating or editing playlists, you need to make your own new group or log in to an existing one</h2>
+    <h2>To start creating or editing playlists, you need to make new group or log in to an existing one</h2>
     <div class="text-center">
       <div class="spinner-grow text-dark" style="width: 80px; height: 80px;" role="status">
-        <span class="sr-only">Loading...</span>
+        <span class="sr-only"></span>
       </div>
     </div>
 

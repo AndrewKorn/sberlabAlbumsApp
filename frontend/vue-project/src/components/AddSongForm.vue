@@ -15,7 +15,7 @@ export default {
   name: "AddSongForm",
   data() {
     return {
-      song_id: "",
+      sound_cloud_id: "",
       artist: "",
       song_name: "",
       duration: ""
@@ -26,7 +26,7 @@ export default {
     onSubmit() {
       if (this.song_name.trim() && this.artist.trim()) {
         const newSong = {
-          song_id: this.song_id,
+          sound_cloud_id: this.sound_cloud_id,
           artist: this.artist,
           song_name: this.song_name,
           duration: this.duration

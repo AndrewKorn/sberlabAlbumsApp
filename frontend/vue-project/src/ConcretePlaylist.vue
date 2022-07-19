@@ -45,7 +45,7 @@ export default {
     fetch("http://localhost:1337/" + this.$route.params.group_name + "/albums/" + this.album_name + "")
         .then(response => response.json())
         .then(json => {
-          this.songs = json.songs
+          this.songs = json
         })
   },
 
@@ -90,7 +90,7 @@ export default {
           .then(response => response.json())
           .then(response => {
             console.log(response)
-            song.song_id = response.tracks.items[0].id.toString()
+            song.sound_cloud_id = response.tracks.items[0].id.toString()
             song.duration = response.tracks.items[0].durationText
             console.log(song.song_id)
           })
@@ -98,7 +98,7 @@ export default {
                 fetch("http://localhost:1337/" + this.$route.params.group_name + "/albums/" + this.album_name + "", {
                   method: "POST",
                   body: JSON.stringify({
-                    song_id: song.song_id,
+                    sound_cloud_id: song.sound_cloud_id,
                     artist: song.artist,
                     song_name: song.song_name,
                     duration: song.duration

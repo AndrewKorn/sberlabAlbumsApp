@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="song in songs">
-      <iframe width="95%" height="100" :src='"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/" + song.song_id + ""'></iframe>
+      <iframe width="95%" height="100" :src='"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/" + song.sound_cloud_id + ""'></iframe>
     </div>
   </div>
 </template>
