@@ -8,10 +8,19 @@
 
       <button v-if="this.$route.path === '/'" class="text-white" style="outline: none;background-color: black;margin-left: auto; margin-right: 5em;" data-toggle="modal" data-target="#createGroup"><h4>Create group</h4></button>
       <button v-if="this.$route.path === '/'" class="text-white" style="outline: none;background-color: black;margin-left: 0; margin-right: 5em;" data-toggle="modal" data-target="#codeInput"><h4>Log in</h4></button>
-      <button v-if="this.$route.path !== '/'" class="text-white" style="outline: none; background-color: black; margin-left: auto; margin-right: 5em"><h4>{{this.$route.params.group_name}}</h4></button>
+      <div class="dropdown" v-if="this.$route.path !== '/'" style="margin-left: auto">
+        <button class="text-white dropdown-toggle" style="outline: none; background-color: black; margin-left: auto; margin-right: 10em; margin-top: 25px" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <h4>{{this.$route.params.group_name}}</h4>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#">Back to home page</a>
+          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#codeInput">Log in to another group</a>
+          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#codeInfo">Get group code</a>
+        </div>
+      </div>
 
 
-      <div class="modal fade text-black-50" id="createGroup" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal fade text-black-50" id="createGroup" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true" v-on:focus="makeID">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -35,7 +44,7 @@
         </div>
       </div>
 
-      <div class="modal fade text-black-50" id="codeInfo" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true" v-on:focus="makeID">
+      <div class="modal fade text-black-50" id="codeInfo" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -48,13 +57,14 @@
               Your group code is {{this.group_code}}. Share it with your friends to make playlists together
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="createGroup">Ok</button>
+              <button v-if="this.$route.path === '/'" type="button" class="btn btn-primary" data-dismiss="modal" v-on:click="createGroup">Ok</button>
+              <button v-if="this.$route.path !== '/'" type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
             </div>
           </div>
         </div>
       </div>
-      <div class="modal fade text-black-50" id="codeInput" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 
+      <div class="modal fade text-black-50" id="codeInput" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -97,8 +107,7 @@
         input: "",
         group_name: "",
         group_code: "",
-        groups: [],
-        flg: 0
+        groups: []
       }
     },
 
