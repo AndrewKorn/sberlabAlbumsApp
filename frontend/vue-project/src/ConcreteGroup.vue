@@ -24,6 +24,7 @@
 import PlaylistTable from "./components/PlaylistTable.vue";
 import AddPlaylistForm from "./components/AddPlaylistForm.vue";
 import router from "./router";
+import {API_BASE_URL} from "./main";
 export default {
   name: "Home",
   data() {
@@ -34,12 +35,12 @@ export default {
   },
 
   mounted() {
-    fetch("http://localhost:1337/" + this.$route.params.group_name + "/albums")
+    fetch(API_BASE_URL + "" + this.$route.params.group_name + "/albums")
         .then(response => response.json())
         .then(json => {
           this.albums = json
           for (let i = 0; i < this.albums.length; ++i) {
-            fetch("http://localhost:1337/" + this.$route.params.group_name + "/albums/" + this.albums[i].album_name + "")
+            fetch(API_BASE_URL + "" + this.$route.params.group_name + "/albums/" + this.albums[i].album_name + "")
                 .then(response => response.json())
                 .then(json => {
                   this.albums[i].songs = json
@@ -54,7 +55,7 @@ export default {
 
   methods: {
     deletePlaylist(name) {
-      fetch("http://localhost:1337/" + this.$route.params.group_name + "/albums/" + name + "" , {method: "DELETE"})
+      fetch(API_BASE_URL + "" + this.$route.params.group_name + "/albums/" + name + "" , {method: "DELETE"})
           .then(response => {
             this.albums = this.albums.filter(album => album.album_name !== name)
           })
@@ -62,7 +63,7 @@ export default {
 
     createPlaylist(album) {
 
-      fetch("http://localhost:1337/" + this.$route.params.group_name + "/albums", {
+      fetch(API_BASE_URL + "" + this.$route.params.group_name + "/albums", {
         method: "POST",
         body: JSON.stringify({
           album_name: album.album_name

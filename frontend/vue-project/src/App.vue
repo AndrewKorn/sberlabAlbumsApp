@@ -96,7 +96,7 @@
 
 <script>
  import router from "./router";
-
+ import {API_BASE_URL} from "./main"
  export default {
     name: "app",
     components: {},
@@ -111,7 +111,7 @@
 
    mounted() {
      this.input = ""
-     fetch("http://localhost:1337/")
+     fetch(API_BASE_URL + "")
          .then(response => response.json())
          .then(json => {
            this.groups = json
@@ -140,7 +140,7 @@
       },
 
       createGroup() {
-        fetch("http://localhost:1337/", {
+        fetch(API_BASE_URL + "", {
           method: "POST",
           body: JSON.stringify({
             group_code: this.group_code,

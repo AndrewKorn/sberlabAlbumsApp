@@ -17,7 +17,7 @@
             <p class="card-text" v-for="song in album.songs" style="text-align: left; margin-top: 5px; margin-bottom: 5px;">
               {{song.artist}} - {{song.song_name}} ({{song.duration}})
             </p>
-<!--            <p class="card-text" v-else>There is no songs yet</p>-->
+            <p class="card-text" v-else>There is no songs yet</p>
           </div>
           </div>
         </div>

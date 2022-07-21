@@ -5,7 +5,7 @@ WORKDIR /app
 COPY go.mod .
 COPY go.sum .
 RUN go mod download
-COPY *.go .
+COPY *.go ./
 RUN go build -o /sberlabAlbumsApp
 
 ENV POSTGRES_HOST=$POSTGRES_HOST
@@ -16,6 +16,6 @@ ENV POSTGRES_PORT=$POSTGRES_PORT
 ENV POSTGRES_TZ=$POSTGRES_TZ
 ENV LISTEN_ON=$LISTEN_ON
 
-EXPOSE 8080
+EXPOSE 1337
 
 CMD [ "/sberlabAlbumsApp" ]
