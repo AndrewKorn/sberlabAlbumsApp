@@ -114,8 +114,16 @@
      fetch("http://localhost:1337/")
          .then(response => response.json())
          .then(json => {
-           console.log(json)
            this.groups = json
+           if (this.$route.path !== "/") {
+             for (let i = 0; i < this.groups.length; ++i) {
+               if (this.groups[i].group_name === this.$route.params.group_name) {
+                 this.group_code = this.groups[i].group_code
+                 console.log(this.group_code)
+                 break
+               }
+             }
+           }
          })
    },
 

@@ -37,9 +37,14 @@ export default {
     fetch("http://localhost:1337/" + this.$route.params.group_name + "/albums")
         .then(response => response.json())
         .then(json => {
-          console.log(json)
           this.albums = json
-        })
+          for (let i = 0; i < this.albums.length; ++i) {
+            fetch("http://localhost:1337/" + this.$route.params.group_name + "/albums/" + this.albums[i].album_name + "")
+                .then(response => response.json())
+                .then(json => {
+                  this.albums[i].songs = json
+                })
+        }})
   },
 
   components: {
@@ -49,7 +54,6 @@ export default {
 
   methods: {
     deletePlaylist(name) {
-      console.log(name)
       fetch("http://localhost:1337/" + this.$route.params.group_name + "/albums/" + name + "" , {method: "DELETE"})
           .then(response => {
             this.albums = this.albums.filter(album => album.album_name !== name)
@@ -57,7 +61,7 @@ export default {
     },
 
     createPlaylist(album) {
-      console.log(album.album_name)
+
       fetch("http://localhost:1337/" + this.$route.params.group_name + "/albums", {
         method: "POST",
         body: JSON.stringify({
