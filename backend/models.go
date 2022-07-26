@@ -27,11 +27,3 @@ type Song struct {
 	Duration     string `json:"duration"`
 	AlbumID      uint   `json:"albumID"`
 }
-
-func (dbe *DBEngine) initTables() error {
-	err := dbe.DB.AutoMigrate(&Group{}, &Album{}, &Song{})
-	if err != nil {
-		return err
-	}
-	return nil
-}

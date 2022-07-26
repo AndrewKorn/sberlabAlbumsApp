@@ -9,20 +9,8 @@ import (
 )
 
 func main() {
-	dbConfig := DBConfig{
-		Host:     os.Getenv("POSTGRES_HOST"),
-		User:     os.Getenv("POSTGRES_USER"),
-		Password: os.Getenv("POSTGRES_PASSWORD"),
-		Name:     os.Getenv("POSTGRES_NAME"),
-		Port:     os.Getenv("POSTGRES_PORT"),
-		SSLMode:  "disable",
-		Tz:       os.Getenv("POSTGRES_TZ"),
-	}
-
-	dbe, _ := NewDBEngine(dbConfig)
-
 	router := mux.NewRouter()
-	RegisterRoutes(router, dbe)
+	router.HandleFunc("/{artist}/{song_name}", parseIDHandler).Methods("GET")
 	headersOk := handlers.AllowedHeaders([]string{"*"})
 	originsOk := handlers.AllowedOrigins([]string{"*"})
 	methodsOk := handlers.AllowedMethods([]string{"GET", "HEAD", "POST", "PUT", "OPTIONS", "DELETE"})

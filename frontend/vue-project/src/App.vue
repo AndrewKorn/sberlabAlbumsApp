@@ -3,7 +3,7 @@
     <div class="header">
       <div class="logo">
         <h1 class="text-white" style="margin-top: 5px; margin-left: 10px; font-size: 60px">Be part'y</h1>
-        <img src="jigsaw.png" width="80" height="80">
+        <img src="../jigsaw.png" width="80" height="80">
       </div>
 
       <button v-if="this.$route.path === '/'" class="text-white" style="outline: none; border: none; background-color: black;margin-left: auto; margin-right: 5em;" data-toggle="modal" data-target="#createGroup"><h4>Create group</h4></button>

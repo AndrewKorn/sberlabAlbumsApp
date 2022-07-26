@@ -20,6 +20,14 @@ type DBConfig struct {
 	Tz       string
 }
 
+func (dbe *DBEngine) initTables() error {
+	err := dbe.DB.AutoMigrate(&Group{}, &Album{}, &Song{})
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func NewDBEngine(dbc DBConfig) (*DBEngine, error) {
 	dsn := fmt.Sprintf(
 		"host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=%s",
