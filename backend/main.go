@@ -18,7 +18,15 @@ func main() {
 		SSLMode:  "disable",
 		Tz:       os.Getenv("POSTGRES_TZ"),
 	}
-
+	/*dbConfig := DBConfig{
+		Host:     "localhost",
+		User:     "postgres",
+		Password: "password",
+		Name:     "postgres",
+		Port:     "5432",
+		SSLMode:  "disable",
+		Tz:       "Asia/Novosibirsk",
+	}*/
 	dbe, _ := NewDBEngine(dbConfig)
 
 	router := mux.NewRouter()
